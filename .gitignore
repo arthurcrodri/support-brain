@@ -1,0 +1,30 @@
+# General
+.DS_Store
+.vscode/
+.idea/
+
+# Python / Backend
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+backend/.env
+backend/data/chroma_db/
+backend/data/manuals/*
+!backend/data/manuals/.gitkeep
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Node / Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+frontend/dist/
+frontend/build/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# Database (SQLite if used locally)
+*.db
+*.sqlite3
