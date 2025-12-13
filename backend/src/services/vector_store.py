@@ -15,7 +15,7 @@ class VectorDB:
         self.api_key - os.getenv("GEMINI_API_KEY")
 
         if not self.api_key:
-            raise ValueError("GEMINI_API_KEY environment variable not found")
+            raise ValueError("GEMINI_API_KEY environment variable not found. Check your .env file.")
 
         genai.configure(api_key=self.api_key)
 
@@ -76,7 +76,7 @@ class VectorDB:
             except Exception as e:
                 print(f"Error processing batch {i}: {e}")
 
-    def search(self, query: str, top_k: int = 3) -> List[Dictp[str, Any]]:
+    def search(self, query: str, top_k: int = 3) -> List[Dict[str, Any]]:
         """
             Performs semantic search for a user query
         """

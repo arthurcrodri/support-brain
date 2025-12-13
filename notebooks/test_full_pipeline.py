@@ -1,6 +1,6 @@
 import sys
 import os
-from dotenv import loaod_dotenv
+from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../backend')))
 
@@ -26,7 +26,7 @@ def run_pipeline():
     print(f"\n[1/3] Processing PDF: {pdf_path}...")
     processor = PDFProcessor(chunk_size=300, overlap=50)
     try:
-        df = processor.proocess(pdf_path)
+        df = processor.process(pdf_path)
         print(f"Success! {len(df)} chunks generated.")
     except FileNotFoundError:
         print("PDF not found. Please run 'python backend/create_dummy_pdf.py' first.")
@@ -39,14 +39,14 @@ def run_pipeline():
         vdb.add_documents(df)
         print("Data indexed successfully!")
     except Exception as e:
-        print(f"Indexing error: {}")
+        print(f"Indexing error: {e}")
         return
 
     # Retrieval
     query = "O que eu faço se o sistema der erro de temperatura?"
 
     print(f"[3/3] Testing semantic search...")
-    print{f"Query: {query}"}
+    print(f"Query: {query}")
 
     results = vdb.search(query, top_k=2)
 
