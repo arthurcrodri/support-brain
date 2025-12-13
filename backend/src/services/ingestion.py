@@ -51,33 +51,45 @@ class PDFProcessor:
         # Replacing multiple newlines with a single space to keep the flow
         text = re.sub(r'\n+', ' ', text)
         # Removing multiple spaces
-        text - re.sub(r'\s+', ' ', text)
+        text = re.sub(r'\s+', ' ', text)
         return text.strip()
 
     def _create_chunks(self, text: str) -> List[str]:
         """
-            Manually splits text into chunks with overlap
+            Splits text into chunks with overlap using a sliding window.
+            Includes safety checks to prevent infinite loops.
         """
+        if not text:
+            return []
+        
         if len(text) <= self.chunk_size:
             return [text]
 
         chunks = []
         start = 0
+        text_len = len(text)
 
-        while start < len(text):
+        while start < text_len:
             end = start + self.chunk_size
 
-            # If it's not at the end, try to find the last space to avoid cutting words
-            if end < len(text):
-                last_space = text.rfind(' ', start, end)
-                if last_space != -1 last_space > start:
-                    end = last_sace
+            if end >= text_len:
+                end = text_len
+                chunks.append(text[start:end])
+                break
 
-            chunk = text[start:end]
-            chunks.append(chunk)
+            last_space = text.rfind(' ', start, end)
 
-            # Moving the window, considering the overlap
-            start += (len(chunk) - self.overlap)
+            if last_space != -1 and last_space > start:
+                end = last_space
+
+            chunks.append(text[start:end])
+
+            next_start = end - self.overlap
+
+            if next_start <= start:
+                start = start + 1
+            else:
+                start = next_start
 
         return chunks
 
