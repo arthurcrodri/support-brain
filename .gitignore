@@ -5,12 +5,12 @@
 
 # Python / Backend
 backend/venv/
-backend/__pycache__/
-backend/*.pyc
 backend/.env
 backend/data/chroma_db/
 backend/data/manuals/*
 !backend/data/manuals/.gitkeep
+__pycache__/
+*.pyc
 
 # Jupyter Notebooks
 .ipynb_checkpoints
