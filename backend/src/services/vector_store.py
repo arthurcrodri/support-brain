@@ -40,7 +40,7 @@ class VectorDB:
 
     def add_documents(self, df: pd.DataFrame, batch_size: int = 100):
         """
-            Ingests a DataFrame of text chunks into the Vector Database. Uses batch processing to handle API limits efficiently.
+            Ingests a DataFrame of text chunks into the Vector Database.
         """
         if df.empty:
             print("No documents to add.")
@@ -81,29 +81,34 @@ class VectorDB:
             Performs semantic search for a user query
         """
         # Embedding the query
-        query_embedding = genai.embed_content(
-            model="models/embedding-001",
-            conent=query,
-            task_type="retrieval_query"
-        )['embedding']
+        try:
+            query_embedding = genai.embed_content(
+                model="models/embedding-001",
+                conent=query,
+                task_type="retrieval_query"
+            )
 
-        # Querying ChromaDB
-        results = self.collection.query(
-            query_embeddings=[query_embedding],
-            n_results=top_k
-        )
+            # Querying ChromaDB
+            results = self.collection.query(
+                query_embeddings=[query_embedding],
+                n_results=top_k
+            )
 
-        # Formatting results
-        formatted_results = []
-        if results['documents']:
-            for i in range(len(results['documents'][0])):
-                formatted_results.append({
-                    "content": results['documents'][0][i],
-                    "metadata": results['metadatas'][0][i],
-                    "distance": results['distances'][0][i],
-                })
+            # Formatting results
+            formatted_results = []
+            if results['documents']:
+                for i in range(len(results['documents'][0])):
+                    formatted_results.append({
+                        "content": results['documents'][0][i],
+                        "metadata": results['metadatas'][0][i],
+                        "distance": results['distances'][0][i] if results['distances'] else None
+                    })
 
-        return formatted_results
+            return formatted_results
+        except Exception as e:
+            print(f"Search error: {e}")
+            return []
+
 
 if __name__ == "__main__":
     # Smoke Test logic to verify imports and client initialization
