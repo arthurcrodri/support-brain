@@ -35,7 +35,7 @@ def run_pipeline():
     # Indexing (vector store)
     print("\n[2/3] Generating Embeddings and saving on ChromaDB (using local LM)...")
     try:
-        vdb = VectorDB(collection_name="test_manuals", verbose=True)
+        vdb = VectorDB(collection_name="technical_manuals", verbose=True)
         vdb.add_documents(df)
         print("Data indexed successfully!")
     except Exception as e:
