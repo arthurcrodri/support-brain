@@ -23,7 +23,11 @@ class VectorDB:
 
         self.logger.debug("--- Starting VectorDB Initialization ---")
         self.logger.info("Loading local embedding model (all-MiniLM-L6-v2)...")
-        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2', device='cpu')
+        try:
+            self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2', device='cpu')
+        except Exception as e:
+            self.logger.warning(f"Network error({e}). Loading model from LOCAL CACHE only.")
+            self.embedding_model = SetenceTransformer('all-MiniLM-L6-v2', device='cpu', local_files_only=True)
 
         db_path = os.path.join(os.path.dirname(__file__), "../../data/chroma_db")
 
