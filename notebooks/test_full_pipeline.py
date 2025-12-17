@@ -33,9 +33,9 @@ def run_pipeline():
         return
 
     # Indexing (vector store)
-    print("\n[2/3] Generating Embeddings and saving on ChromaDB (consuming Google's API)...")
+    print("\n[2/3] Generating Embeddings and saving on ChromaDB (using local LM)...")
     try:
-        vdb = VectorDB(collection_name="test_manuals")
+        vdb = VectorDB(collection_name="test_manuals", verbose=True)
         vdb.add_documents(df)
         print("Data indexed successfully!")
     except Exception as e:
@@ -53,7 +53,7 @@ def run_pipeline():
     print("\n--- RESULTS FOUND ---")
     if results:
         for i, res in enumerate(results):
-            print(f"\nResult {i+1} (Distance: {res['distance']:..4f}):")
+            print(f"\nResult {i+1} (Distance: {res['distance']:.4f}):")
             print(f"Source: {res['metadata']['source']} (Page {res['metadata']['page']})")
             print(f"Content: {res['content'].strip()}")
     else:
