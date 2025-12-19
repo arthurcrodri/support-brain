@@ -1,27 +1,18 @@
-import { Bot } from 'lucide-react';
+import ChatInterface from "@/components/ChatInterface";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-900 text-white">
-      <div className="bg-slate-800 p-8 rounded-2xl border border-slate-7000 shadow-xl text-center max-w-md">
-        <div className="flex justify-center mb-4">
-          <div className="p-4 bg-blue-600 rounded-full animate-bounce">
-            <Bot size={48} className="text-white" />
-          </div>
-        </div>
-
-        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-          Suport Brain
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-24 bg-slate-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black selection:bg-blue-500/30">
+      <div className="mb-10 text-center space-y-4">
+        <h1 className="text-5xl font-extrabold bg-gradient-to-br from-white via-slate-200 to-slate-500 bg-clip-text text-transparent tracking-tight">
+          Support Brain
         </h1>
-
-        <p className="text-slate-400 mb-6">
-          Stack: Next.js + TypeScript + Tailwind
+        <p className="text-slate-400 text-lg font-light max-w-lg mx-auto">
+          Smart techincal assistant powered by <span className="text-blue-400 font-medium">RAG</span> and official manuals.
         </p>
-
-        <div className="px-4 py-2 bg-slate-950/50 rounded border border-slate-700 text-sm font-mono text-emerald-400">
-          Frontend System: ONLINE
-        </div>
       </div>
+
+      <ChatInterface />  
     </main>
-  )
+  );
 }
