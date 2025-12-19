@@ -77,16 +77,16 @@ export default function ChatInterface() {
 
   return (
     <div className="flex flex-col h-[600px] w-full max-w-4xl bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden">
-      <div className="bg-slate-950/50 p4 border-b border-slate-800 flex items-center gap-3 backdrop-blur-sm">
+      <div className="bg-slate-950/50 p-4 border-b border-slate-800 flex items-center gap-3 backdrop-blur-sm">
         <div className="p-2 bg-blue-600 rounded-lg shadow-lg shadow-blue-900/20">
           <Bot className="text-white w-6 h-6" />
         </div>
         <div>
           <h2 className="font-bold text-white text-lg">Support Brain AI</h2>
           <div className="flex items-center gap-2">
-            <span className="reflective flex h-2 w-2">
+            <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="reflective inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span className="text-xs text-slate-400 font-mono">Gemini 2.5 - RAG Active</span>
           </div>
@@ -95,7 +95,7 @@ export default function ChatInterface() {
     
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth">
         {messages.map((msg, idx) => (
-          <div key={idx} className={`flex gap-4 ${msg.rolle == "user" ? "justify-end" : "justify-start"}`}>
+          <div key={idx} className={`flex gap-4 ${msg.role == "user" ? "justify-end" : "justify-start"}`}>
             {msg.role === "assistant" && (
               <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0">
                 <Bot size={16} className="text-blue-400" />
@@ -162,7 +162,7 @@ export default function ChatInterface() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ex: How to fix an overheating error?"
-            className="w-full bg-slate-950 border border-slate-800 text-slate-200 rounded-xl pl-4 pr-14 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all shadow-inner placeholder:text-slate-600"
+            className="w-full bg-slate-950 border border-slate-800 text-slate-200 rounded-xl pl-4 pr-14 py-4 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all shadow-inner placeholder:text-slate-600"
             disabled={loading}
           />
           <button
