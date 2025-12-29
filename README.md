@@ -10,7 +10,7 @@
 
 **Support Brain** is a Full Stack AI application designed to solve complex technical support scenarios. Unlike generic chatbots, Support Brain uses a **RAG (Retrieval-Augmented Generation)** architecture to "read" specific technical manuals (PDFs), index their content, and provide accurate, context-aware answers with citations.
 
-It was built to assist technicians and users in troubleshooting hardware errors (e.g., Dell Servers) by retrieving exact procedures from official documentation.
+It was built to assist technicians and users in troubleshooting hardware errors by retrieving exact procedures from official documentation.
 
 ## ✨ Key Features
 
